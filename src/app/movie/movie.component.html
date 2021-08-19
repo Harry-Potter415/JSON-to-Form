@@ -194,7 +194,7 @@
         <div id="formFooter">
             <button mat-raised-button="" type="submit" class="">Submit</button>
             <!-- <button mat-raised-button="" type="button" (click)="onClickLoadButton()" class="">Load</button> -->
-                <input type="file" id="file" (change)="handleFileInput($event)">
+            <input type="file" id="file" (change)="handleFileInput($event)">
             <div id="postResult">
                 <div *ngIf="showResponse" class="responseDiv">Congratulations! your movie <span
                         style="color:red">"{{submitResponse}}"</span> is good to go!
