@@ -1,0 +1,208 @@
+<div class="cinnity">
+    <form [formGroup]="movieForm" id="movie" (ngSubmit)="onSubmit(movieForm.value)">
+        <div class="inputDivText titleDiv">
+            <label for="title">Title</label>
+            <input type="text" formControlName="title" id="title">
+            <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].sceneTitle }}</p-->
+        </div>
+        <div class="openingCredits">
+            <div class="inputDivText ">
+                <label for="maker">Maker</label>
+                <input type="text" formControlName="maker" id="maker">
+                <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].sceneTitle }}</p-->
+            </div>
+            <div class="inputDivText ">
+                <label for="producer">Producer</label>
+                <input type="text" formControlName="producer" id="producer">
+                <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].sceneTitle }}</p-->
+            </div>
+            <div class="inputDivText ">
+                <label for="music">Music</label>
+                <input type="text" formControlName="music" id="music">
+                <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].sceneTitle }}</p-->
+            </div>
+        </div>
+        <!-- scene -->
+        <span class="componentHeader">Scenes</span>
+        <div formArrayName="scenes" id="scenesForm">
+            <div *ngFor="let scene of movieForm['controls'].scenes['controls']; let sceneIndex=index">
+                <div formGroupName="{{sceneIndex}}" class="scene">
+                    <div class="sceneNum">{{sceneIndex+1}}</div>
+                    <!--div class="inputDivText">
+                        <label for="sceneNumber">Scene No. </label>
+                        <span class="smallInput sceneCounter" id="sceneNumber"># {{sceneIndex+1}}</span>
+                    </div-->
+                    <div class="inputDivText sceneInfo">
+                        <label for="sceneTitle">Title</label>
+                        <input type="text" formControlName="title" id="sceneTitle">
+                        <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].sceneTitle }}</p-->
+                    </div>
+                    <div class="inputDivText">
+                        <label for="sceneCaption">Caption</label>
+                        <input type="text" formControlName="caption" id="sceneCaption" class="wideInput">
+                        <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                    </div>
+                    <div class="inputDiv">
+                        <mat-form-field appearance="fill">
+                            <label>Set</label>
+                            <mat-select formControlName="set">
+                                <mat-option *ngFor="let set of sets" [value]="set">
+                                    {{set}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                    </div>
+                    <div class="inputDivText">
+                        <mat-form-field appearance="fill">
+                            <label>Effects</label>
+                            <mat-select formControlName="fx">
+                                <mat-option *ngFor="let effect of effects" [value]="effect">
+                                    {{effect}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!--p>{{ formErrors.scenes[sceneIndex].actors[actorIndex].alias }}</p-->
+                    </div>
+                    <!-- actor -->
+                    <div formArrayName="actors" id="actorsForm">
+                        <span class="componentHeader">Actors:</span>
+                        <div *ngFor="let actor of scene['controls'].actors['controls']; let actorIndex=index">
+                            <div formGroupName="{{actorIndex}}" class="actor">
+                                <div class="inputDiv">
+                                    <mat-form-field appearance="fill">
+                                        <label>Name</label>
+                                        <mat-select formControlName="name">
+                                            <mat-option *ngFor="let actorName of actorNames; index as nameIndex"
+                                                [value]="actorName" [disabled]="!actorObjs[actorName].enabled">
+                                                <img style="float:left;display:block;margin: 5px;box-shadow: 0 0 2px #333;border:2px solid white"
+                                                    with="25" height="25"
+                                                    src="../../assets/thumbnails/{{actorName}}.png">
+
+                                                {{toTitleCase(actorName)}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                </div>
+                                <div class="inputDivText">
+                                    <label for="alias">Alias</label>
+                                    <input type="text" formControlName="alias" id="alias">
+                                    <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                </div>
+                                <div class="inputDiv">
+                                    <mat-form-field appearance="fill">
+                                        <label>Camera</label>
+                                        <mat-select formControlName="camera">
+                                            <mat-option *ngFor="let camera of cameras" [value]="camera.value">
+                                                {{camera.label}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                </div>
+                                <div class="inputDiv">
+                                    <mat-form-field appearance="fill">
+                                        <label>Position</label>
+                                        <mat-select formControlName="position">
+                                            <mat-option *ngFor="let position of positions" [value]="position">
+                                                {{position}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                </div>
+                                <!-- action -->
+                                <div formArrayName="actions" id="actions" *ngIf="actor['controls']['name'].value">
+                                    <!-- get actors name: objKeys(actorObjs[actor['controls']['name'].value]) -->
+                                    <span class="componentHeader">{{actor['controls']['name'].value}}'s Actions:</span>
+                                    <div
+                                        *ngFor="let action of actor['controls'].actions['controls']; let actionIndex=index">
+                                        <div formGroupName="{{actionIndex}}" class="actions">
+                                            <div class="inputDiv">
+                                                <mat-form-field appearance="fill">
+                                                    <label>Action</label>
+                                                    <mat-select formControlName="verb">
+                                                        <mat-option
+                                                            *ngFor="let actionName of objKeys(actorObjs[actor['controls']['name'].value].actions)"
+                                                            [value]="actionName"
+                                                            [disabled]="!actorObjs[actor['controls']['name'].value].actions[actionName].enabled">
+                                                            {{actionName}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                            </div>
+                                            <!--path to actor:actorObjs[actor.controls.name.value]-->
+                                            <!--path to action:action.controls.verb.value-->
+                                            <div class="inputDiv" *ngIf="action.controls.verb.value">
+                                                <mat-form-field appearance="fill">
+                                                    <label>Qualify the Action</label>
+                                                    <mat-select formControlName="adverb">
+                                                        <mat-option
+                                                            *ngFor="let actionMode of objKeys(actorObjs[actor.controls.name.value].actions[action.controls.verb.value].modes); index as modeIndex"
+                                                            [value]="actionMode">
+                                                            {{actionMode}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                            </div>
+                                            <div class="inputDivText">
+                                                <label for="duration">Duration</label>
+                                                <input type="text" formControlName="duration" id="duration">
+                                                <!--p> {{ formErrors.scenes[sceneIndex].actors[actorIndex].name }}</p-->
+                                            </div>
+                                            <div class="inputDiv wideInput">
+                                                <mat-form-field appearance="fill">
+                                                    <label>Speech Lines</label>
+                                                    <textarea matInput cdkTextareaAutosize
+                                                        #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                                        cdkAutosizeMaxRows="3"
+                                                        formControlName="speechThoughtLines"></textarea>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="inputDivText linesDiv">
+                                                <div class="mat-wrapper">
+                                                    <mat-radio-group formControlName="{{'speechThoughtType'}}">
+                                                        <mat-radio-button value="Speech">Speech</mat-radio-button>
+                                                        <mat-radio-button value="Thought">Thought</mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="materialIconBtn addActionBtn"
+                                        (click)="addAction(sceneIndex,actorIndex)"><span
+                                            class="material-icons">add_box</span>Add Action</div>
+                                </div>
+                                <!-- action End -->
+                            </div>
+                        </div>
+                        <div class="materialIconBtn addActorBtn" (click)="addActor(sceneIndex)"><span
+                                class="material-icons">add_box</span>Add an Actor</div>
+                    </div>
+                    <!-- actor End-->
+                </div>
+            </div>
+            <div class="materialIconBtn addSceneBtn" (click)="addScene()"><span class="material-icons">add_box</span>Add
+                a Scene
+            </div>
+        </div>
+        <!-- X End -->
+        <div id="formFooter">
+            <button mat-raised-button="" type="submit" class="">Submit</button>
+            <!-- <button mat-raised-button="" type="button" (click)="onClickLoadButton()" class="">Load</button> -->
+                <input type="file" id="file" (change)="handleFileInput($event)">
+            <div id="postResult">
+                <div *ngIf="showResponse" class="responseDiv">Congratulations! your movie <span
+                        style="color:red">"{{submitResponse}}"</span> is good to go!
+                    <a [href]="previewPath" target="blank">See a preview here...</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<h5>Field Values</h5>
+<pre style="font-size:15px">{{ movieForm.value | json }}</pre>

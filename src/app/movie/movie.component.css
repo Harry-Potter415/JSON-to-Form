@@ -1,0 +1,164 @@
+.mat-raised-button{
+    padding:0!important
+}
+
+.mat-option{
+    padding-left: 5px;
+}
+#formFooter{
+    display: flex;
+}
+#postResult{
+    background: antiquewhite;
+    border-radius: 2px;
+    width:100%;
+    padding-left:40px
+}
+.responseDiv{
+    padding:10px
+}
+  #movie{
+    box-shadow: 0 0 1px grey;
+    padding: 10px;
+    background:#f9f9f9
+}
+#actorsForm label{
+    color: rebeccapurple;
+}
+.titleDiv{
+   display: grid!important;
+   background:rgba(41, 171, 226, 0.2)
+}
+ .titleDiv input{
+    text-align: center;
+    font-family: 'neoretrodrawregular','desyrelregular', 'neoretrodrawregular';
+    font-size: 24px;
+}
+/* ----------------------------------SCENE STYLES ----------------------------------*/
+.sceneNum{
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-family: 'typewriter';
+    padding: 10px 7px;
+    font-size: 24px;
+    background: tomato;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.sceneNum::before{
+    content:"#"
+}
+.openingCredits{
+    text-align: center;
+}
+#scenesForm{
+    margin-top:10px;
+}
+.scene{
+    margin-top:15px;
+    position:relative;
+    border-radius: 3px;
+    border-top: 1px solid tomato;
+
+}
+.sceneInfo{
+    margin-left: 50px;
+}
+.sceneCounter[_ngcontent-cay-c86] {
+    font-family: 'typewriter';
+    font-weight: bold;
+    background: darkgrey;
+    color: white;
+    height: 35px;
+    line-height: 2.5;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.addSceneBtn, .addActorBtn, .addActionBtn{
+    cursor: pointer;
+}
+.addSceneBtn{
+    color:tomato;
+}
+/* ----------------------------------//SCENE STYLES ----------------------------------*/
+
+/* ----------------------------------ACTOR STYLES ----------------------------------*/
+#actorsForm, #actions{
+    margin-left: 20px;
+}
+.addActorBtn{
+   color: rebeccapurple;
+}
+#actionsForm{
+    border: 1px solid yellow
+}
+.addActionBtn{
+    color:darkslategray;
+}
+.inputDivText {
+    display: inline-grid;
+    margin-right: 8px;
+    /*border-top: 1px solid #d9d9;*/
+    margin-bottom: 10px;
+}
+.actions{
+    margin-left:10px;
+}
+#actions{
+    background: ghostwhite;
+    border-radius: 3px;
+}
+.componentHeader{
+    font-weight:bold;
+    padding:10px;
+    display:block;
+  }
+
+.inputDivText label {
+    padding: 7px 10px 6px;
+}
+input[_ngcontent-cay-c86], textarea[_ngcontent-cay-c86] {
+    font: 1.4em/1.5em "handwriting", cursive, sans-serif;
+    border: 0 0 1px;
+    padding: 0 10px;
+    margin: 0;
+    background: none;
+}
+.cinnity input{
+    border-width: 0 0 1px;
+    border-radius: 0px;
+    background: none;
+    font-family: desyrelregular;
+    text-align: center;
+}
+.wideInput {
+    min-width: 230px;
+}
+
+.actor {
+    background: #eaedfd;
+    box-shadow: 0px 0px 2px grey;
+    border-radius: 2px;
+    padding: 5px;
+    margin-bottom:5px;
+    border: 2px solid white;
+}
+
+.mat-form-field-infix {
+    border-top: 0px;
+}
+.inputDiv .mat-form-field-wrapper {
+    padding-bottom: 0em;
+}
+
+.mat-form-field {
+    line-height: 1.4;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0 0.75em!important;
+}
